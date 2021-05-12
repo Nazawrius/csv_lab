@@ -1,21 +1,5 @@
 from sys import argv
-import json
-
-def load_data(ini_path):
-    ini = json.load(open(ini_path))
-
-    if 'input' not in ini or 'output' not in 'ini':
-        raise Exception
-
-    input = ini['input']
-    if 'json' not in input or 'csv' not in input or 'encoding' not in input:
-        raise Exception
-
-    output = ini['output']
-    if 'fname' not in output or 'encoding' not in output:
-        raise Exception
-
-    return input, output
+from processing import load_ini, load_csv, load_stat, fit, process
 
 def main():
     print('description')
@@ -27,12 +11,37 @@ def main():
         return None
 
     try:
-        input, output = load_data(argv[1])
+        print(f'ini {argv[1]}: ', end='')
+        input, output = load_ini(argv[1])
     except Exception:
-        print('*****program aborted*****')
+        print('\n*****program aborted*****')
         return None
     else:
-        print(f'ini {argv[1]}: OK')
+        print('OK')
+
+    try:
+        print(f'input-csv {input["csv"]}: ', end='')
+        csv = load_csv(input)
+    except Exception:
+        print('\n*****program aborted*****')
+        return None
+    else:
+        print('OK')
+
+    try:
+        print(f'input-json {input["json"]}: ', end='')
+        json = load_stat(input)
+    except Exception:
+        print('\n*****program aborted*****')
+        return None
+    else:
+        print('OK')
+
+    print('json?=csv: ', end='')
+    if fit(csv, json):
+        print('OK')
+    else:
+        print('UPS')
 
 if __name__ == '__main__':
     main()
