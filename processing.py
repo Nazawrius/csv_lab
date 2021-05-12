@@ -21,7 +21,8 @@ def load_csv(input):
         return list(csv.reader(f, delimiter=';'))
 
 def load_stat(input):
-    return dict(json.load(open(input['json'], 'r', encoding=input['encoding'])))
+    with open(input['json'], 'r', encoding=input['encoding']) as f:
+        return dict(json.load(f))
 
 def fit(j, c):
     ...
