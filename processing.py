@@ -1,7 +1,7 @@
 import json, csv
 
 def load_ini(ini_path):
-    ini = json.load(open(ini_path))
+    ini = json.load(open(ini_path, 'r'))
 
     if 'input' not in ini or 'output' not in ini:
         raise Exception
@@ -21,7 +21,7 @@ def load_csv(input):
         return list(csv.reader(f, delimiter=';'))
 
 def load_stat(input):
-    return dict(json.load(open(input['json'])))
+    return dict(json.load(open(input['json'], 'r')))
 
 def fit(j, c):
     ...
