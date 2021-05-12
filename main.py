@@ -10,17 +10,17 @@ def main():
         print('*****program aborted*****')
         return None
 
+    print(f'ini {argv[1]}: ', end='')
     try:
-        print(f'ini {argv[1]}: ', end='')
         input, output = load_ini(argv[1])
     except Exception:
         print('\n*****program aborted*****')
         return None
     else:
         print('OK')
-
+    
+    print(f'input-csv {input["csv"]}: ', end='')
     try:
-        print(f'input-csv {input["csv"]}: ', end='')
         csv = load_csv(input)
     except Exception:
         print('\n*****program aborted*****')
@@ -28,8 +28,8 @@ def main():
     else:
         print('OK')
 
+    print(f'input-json {input["json"]}: ', end='')
     try:
-        print(f'input-json {input["json"]}: ', end='')
         json = load_stat(input)
     except Exception:
         print('\n*****program aborted*****')
@@ -42,6 +42,15 @@ def main():
         print('OK')
     else:
         print('UPS')
+              
+    print(f'output {output["fname"]}: ', end='')
+    try:
+        process(csv, json, output)
+    except Exception:
+        print('\n*****program aborted*****')
+        return None
+    else:
+        print('OK')
 
 if __name__ == '__main__':
     main()
