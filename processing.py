@@ -27,5 +27,5 @@ def load_stat(input):
 def fit(j, c):
     ...
 
-def process():
-    ...
+def process(csv, json, output):
+    
