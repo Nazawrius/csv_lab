@@ -38,9 +38,11 @@ def load_stat(input):
         return dict(json.load(f))
 
 
-def fit(stat, data):
-    ...
+def fit(stat, invoices):
+    total_entries = sum(invoice.total_entries for invoice in invoices.values())
+    total_number = sum(invoice.total_number for invoice in invoices.values())
 
+    return stat["загальна кількість записів"] == total_entries and stat["сума кількостей"] == total_number
 
 def process(data, output):
     ...

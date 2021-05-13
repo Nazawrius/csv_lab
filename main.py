@@ -22,7 +22,7 @@ def main():
 
     print(f'input-csv {input["csv"]}: ', end='')
     try:
-        data = load_csv(input)
+        invoices = load_csv(input)
     except Exception as e:
         abort(e)
         return None
@@ -39,14 +39,14 @@ def main():
         print('OK')
 
     print('json?=csv: ', end='')
-    if fit(stat, data):
+    if fit(stat, invoices):
         print('OK')
     else:
         print('UPS')
 
     print(f'output {output["fname"]}: ', end='')
     try:
-        process(data, output)
+        process(invoices, output)
     except Exception as e:
         abort(e)
         return None
