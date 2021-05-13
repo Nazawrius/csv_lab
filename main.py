@@ -20,6 +20,7 @@ def main():
         print('OK')
 
     print(f'input-csv {input["csv"]}: ', end='')
+    data = load_csv(input)
     try:
         data = load_csv(input)
     except Exception:
