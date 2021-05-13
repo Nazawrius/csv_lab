@@ -1,6 +1,7 @@
 import json, csv
 from models import Invoice, Entry
 
+
 def load_ini(ini_path):
     ini = json.load(open(ini_path, 'r'))
 
@@ -33,6 +34,7 @@ def load_csv(input):
 
         return invoice_dict
 
+
 def load_stat(input):
     with open(input['json'], 'r', encoding=input['encoding']) as f:
         return dict(json.load(f))
@@ -44,5 +46,8 @@ def fit(stat, invoices):
 
     return stat["загальна кількість записів"] == total_entries and stat["сума кількостей"] == total_number
 
-def process(data, output):
-    ...
+
+def process(invoices, output):
+    with open(output["fname"], 'w', encoding=output["encoding"]) as f:
+        for id, invoice in invoices.items():
+            f.write(str(invoice))
