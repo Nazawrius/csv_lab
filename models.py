@@ -34,8 +34,6 @@ class Invoice:
 
     def __repr__(self):
         s = f'{self.id}\t{self.total_number}\t{self.total_entries}\t{self.total_cost}\n'
-        for key in sorted(self.entries.keys()):
-            s += f'\t{key}\t{self.entries[key]}\t{key}\n'
         return s
 
 
