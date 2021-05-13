@@ -1,7 +1,8 @@
 class Invoice:
     def __init__(self, row):
-        self.number = row[0]
-        if not(len(self.number) == 11 and self.number.isalnum()):
+        if len(row[0]) == 11 and row[0].isalnum() and row[0].strip() == row[0]:
+            self.number = row[0]
+        else:
             raise Exception
 
         self.entries = dict()
@@ -10,10 +11,10 @@ class Invoice:
 
     def add_product(self, row):
         number = row[0]
-        if not number.isdigit() or number[0] == 0:
-            raise Exception
-        else:
+        if number.isdigit() or number[0] != 0:
             self.entries[int(number)] = Entry(row[1:])
+        else:
+            raise Exception
             
         entry_name = self.entries[int(number)].name
         if entry_name in self.number_of_repeats:
@@ -30,7 +31,10 @@ class Invoice:
 
 class Entry:
     def __init__(self, row):
-        ...
+        if (ch in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 '-_" for ch in row[0]) and 2 <= len(row[0]) <= 26 and row[0].strip == row[0]:
+            self.name = row[0]
+        else:
+            raise Exception
 
     def __repr__(self):
         return ''
