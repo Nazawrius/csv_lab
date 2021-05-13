@@ -20,6 +20,8 @@ class Invoice:
 
     def add_entry(self, row):
         """
+        add_entry(self, row, /)
+        
         Adds an entry to invoice
         """
         number = row[0]

@@ -4,6 +4,8 @@ from debug import abort
 
 def main():
     """
+    main(/)
+
     Main function
     """
     print('description')
