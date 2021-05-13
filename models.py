@@ -58,7 +58,7 @@ class Entry:
             raise Exception
 
         cost = self.price * self.number
-        if row[3][-3] == '.' and row[3] == f'{cost:.2f}'
+        if row[3][-3] == '.' and row[3] == f'{cost:.2f}':
             self.cost = float(row[3])
         else:
             raise Exception
