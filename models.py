@@ -4,31 +4,38 @@ class Invoice:
             raise Exception
 
         if len(row[0]) == 11 and row[0].isalnum() and row[0].strip() == row[0]:
-            self.number = row[0]
+            self.id = row[0]
         else:
             raise Exception
 
         self.entries = dict()
         self.number_of_repeats = dict()
-        self.add_product(row[1:])
+        self.total_entries = 0
+        self.total_number = 0
+        self.total_cost = 0
+        self.add_entry(row[1:])
 
-    def add_product(self, row):
+    def add_entry(self, row):
         number = row[0]
-        if number.isdigit() or number[0] != 0:
+        if number.isdigit() and number[0] != 0:
             self.entries[int(number)] = Entry(row[1:])
         else:
             raise Exception
 
-        entry_name = self.entries[int(number)].name
-        if entry_name in self.number_of_repeats:
-            self.number_of_repeats[entry_name] += 1
+        entry = self.entries[int(number)]
+        if entry.name in self.number_of_repeats:
+            self.number_of_repeats[entry.name] += 1
         else:
-            self.number_of_repeats[entry_name] = 1
+            self.number_of_repeats[entry.name] = 1
+
+        self.total_entries += 1
+        self.total_number += entry.number
+        self.total_cost += entry.cost
 
     def __repr__(self): #Not finished!!!
-        s = self.number + '\n'
+        s = f'{self.id}\t{self.total_number}\t{self.total_entries}\t{self.total_cost}\n'
         for key in sorted(self.entries.keys()):
-            s += f'\t{key}\t{self.entries[key]}\n'
+            s += f'\t{key}\t{self.entries[key]}\t{key}\n'
         return s
 
 

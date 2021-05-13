@@ -24,12 +24,12 @@ def load_csv(input):
         reader = csv.reader(f, delimiter=';')
 
         for row in reader:
-            invoice_number = row[0]
+            invoice_id = row[0]
 
-            if invoice_number in invoice_dict:
-                invoice_dict[invoice_number].add_product(row[1:])
+            if invoice_id in invoice_dict:
+                invoice_dict[invoice_id].add_entry(row[1:])
             else:
-                invoice_dict[invoice_number] = Invoice(row)
+                invoice_dict[invoice_id] = Invoice(row)
 
         return invoice_dict
 
