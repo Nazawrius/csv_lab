@@ -1,4 +1,7 @@
 class Invoice:
+    """
+    Class for handling invoices
+    """
     def __init__(self, row):
         if len(row) != 6:
             raise Exception("Invoice validation error")
@@ -16,6 +19,9 @@ class Invoice:
         self.add_entry(row[1:])
 
     def add_entry(self, row):
+        """
+        Adds an entry to invoice
+        """
         number = row[0]
         if number.isdigit() and number[0] != 0:
             self.entries[int(number)] = Entry(row[1:])
@@ -33,11 +39,13 @@ class Invoice:
         self.total_cost += entry.cost
 
     def __repr__(self):
-        s = f'{self.id} {self.total_number:.3f} {self.total_entries} {self.total_cost:.2f}\n'
-        return s
+        return f'{self.id} {self.total_number:.3f} {self.total_entries} {self.total_cost:.2f}\n'
 
 
 class Entry:
+    """
+    Class for handling entries
+    """
     def __init__(self, row):
         name_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 '-_"
         if all((ch in name_chars for ch in row[0])) and 2 <= len(row[0]) <= 26 and row[0].strip() == row[0]:

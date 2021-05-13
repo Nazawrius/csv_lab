@@ -3,6 +3,9 @@ from processing import load_ini, load_csv, load_stat, fit, process
 from debug import abort
 
 def main():
+    """
+    Main function
+    """
     print('description')
 
     print('*****')

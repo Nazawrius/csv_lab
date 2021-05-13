@@ -3,6 +3,9 @@ from models import Invoice, Entry
 
 
 def load_ini(ini_path):
+    """
+    Reading settings from .ini
+    """
     ini = json.load(open(ini_path, 'r'))
 
     if 'input' not in ini or 'output' not in ini:
@@ -20,6 +23,9 @@ def load_ini(ini_path):
 
 
 def load_csv(input):
+    """
+    Reading data from .csv
+    """
     with open(input['csv'], 'r', encoding=input['encoding']) as f:
         invoice_dict = dict()
         reader = csv.reader(f, delimiter=';')
@@ -36,11 +42,17 @@ def load_csv(input):
 
 
 def load_stat(input):
+    """
+    Reading options from .json
+    """
     with open(input['json'], 'r', encoding=input['encoding']) as f:
         return dict(json.load(f))
 
 
 def fit(stat, invoices):
+    """
+    Checking if .csv data fits .json options
+    """
     total_entries = sum(invoice.total_entries for invoice in invoices.values())
     total_number = sum(invoice.total_number for invoice in invoices.values())
 
@@ -48,9 +60,15 @@ def fit(stat, invoices):
 
 
 def key_func(entry):
+    """
+    Key function for sorting invoice entries
+    """
     return (entry[1].name, entry[1].number, entry[1].price)
 
 def process(invoices, output):
+    """
+    Processing .csv data and outputing into .txt
+    """
     with open(output["fname"], 'w', encoding=output["encoding"]) as f:
         for invoice in invoices.values():
             flag = False
