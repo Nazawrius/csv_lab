@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 
 def abort(e):
     if DEBUG:
