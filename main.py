@@ -1,5 +1,6 @@
 from sys import argv
 from processing import load_ini, load_csv, load_stat, fit, process
+from debug import abort
 
 def main():
     print('description')
@@ -7,24 +8,23 @@ def main():
     print('*****')
 
     if len(argv) != 2:
-        print('*****program aborted*****')
+        abort()
         return None
 
     print(f'ini {argv[1]}: ', end='')
     try:
         input, output = load_ini(argv[1])
-    except Exception:
-        print('\n*****program aborted*****')
+    except Exception as e:
+        abort(e)
         return None
     else:
         print('OK')
 
     print(f'input-csv {input["csv"]}: ', end='')
-    data = load_csv(input)
     try:
         data = load_csv(input)
-    except Exception:
-        print('\n*****program aborted*****')
+    except Exception as e:
+        abort(e)
         return None
     else:
         print('OK')
@@ -32,8 +32,8 @@ def main():
     print(f'input-json {input["json"]}: ', end='')
     try:
         stat = load_stat(input)
-    except Exception:
-        print('\n*****program aborted*****')
+    except Exception as e:
+        abort(e)
         return None
     else:
         print('OK')
@@ -47,8 +47,8 @@ def main():
     print(f'output {output["fname"]}: ', end='')
     try:
         process(data, output)
-    except Exception:
-        print('\n*****program aborted*****')
+    except Exception as e:
+        abort(e)
         return None
     else:
         print('OK')

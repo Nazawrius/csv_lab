@@ -1,5 +1,8 @@
 class Invoice:
     def __init__(self, row):
+        if len(row) != 6:
+            raise Exception
+
         if len(row[0]) == 11 and row[0].isalnum() and row[0].strip() == row[0]:
             self.number = row[0]
         else:
@@ -15,7 +18,7 @@ class Invoice:
             self.entries[int(number)] = Entry(row[1:])
         else:
             raise Exception
-            
+
         entry_name = self.entries[int(number)].name
         if entry_name in self.number_of_repeats:
             self.number_of_repeats[entry_name] += 1
@@ -31,10 +34,20 @@ class Invoice:
 
 class Entry:
     def __init__(self, row):
-        if (ch in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 '-_" for ch in row[0]) and 2 <= len(row[0]) <= 26 and row[0].strip == row[0]:
+        name_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 '-_"
+        if all((ch in name_chars for ch in row[0])) and 2 <= len(row[0]) <= 26 and row[0].strip() == row[0]:
             self.name = row[0]
         else:
             raise Exception
 
+        if ... :
+            self.price = float(row[1])
+
+        if ... :
+            self.number = float(row[2])
+
+        if ... :
+            self.cost = float(row[3])
+
     def __repr__(self):
-        return ''
+        return f'{self.name}\t{self.price}\t{self.number}\t{self.cost}'
