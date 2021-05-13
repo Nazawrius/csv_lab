@@ -1,3 +1,7 @@
+DEBUG = TRUE
+
 def abort(e):
-    print(e)
-    #print('*****program aborted*****')
+    if DEBUG:
+        print(e)
+    else:
+        print('*****program aborted*****')
