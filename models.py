@@ -14,7 +14,16 @@ class Invoice:
         else:
             self.entries[int(number)] = Entry(row[2:])
 
+    def __repr__(self): #Not finished!!!
+        s = self.number + '\n'
+        for key in sorted(self.entries.keys()):
+            s += '\t' + str(key) + '\t' + str(self.entries[key]) + '\n'
+        return s
+
 
 class Entry:
     def __init__(self, row):
-        pass
+        ...
+
+    def __repr__(self):
+        return ''
