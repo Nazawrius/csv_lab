@@ -47,10 +47,19 @@ def fit(stat, invoices):
     return stat["загальна кількість записів"] == total_entries and stat["сума кількостей"] == total_number
 
 
+def key_func(entry):
+    return (entry[1].name, entry[1].number, entry[1].price)
+
 def process(invoices, output):
     with open(output["fname"], 'w', encoding=output["encoding"]) as f:
         for invoice in invoices.values():
-            for entry in invoice.entries.values():
+            flag = False
+            repeating_entries = set()
+            for key, entry in invoice.entries.items():
                 if invoice.number_of_repeats[entry.name] > 1:
-                    print(invoice)
-                    break
+                    flag = True
+                    repeating_entries.add((key, invoice.entries[key]))
+            if flag:
+                f.write(str(invoice))
+                for key, entry in sorted(repeating_entries, key=key_func):
+                    f.write('\t' + str(entry) + '\t' + str(key) + '\n')
