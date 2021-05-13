@@ -55,10 +55,12 @@ def process(invoices, output):
         for invoice in invoices.values():
             flag = False
             repeating_entries = set()
+            
             for key, entry in invoice.entries.items():
                 if invoice.number_of_repeats[entry.name] > 1:
                     flag = True
                     repeating_entries.add((key, invoice.entries[key]))
+
             if flag:
                 f.write(str(invoice))
                 for key, entry in sorted(repeating_entries, key=key_func):
