@@ -45,12 +45,12 @@ class Entry:
         else:
             raise Exception("Entry name validation error")
 
-        if row[1][-3] == '.' :
+        if row[1][-3] == '.' and float(row[1]) > 0:
             self.price = float(row[1])
         else:
             raise Exception("Entry price validation error")
 
-        if row[2][-4] == '.' :
+        if row[2][-4] == '.' and float(row[2]) > 0:
             self.number = float(row[2])
         else:
             raise Exception("Entry number validation error")
