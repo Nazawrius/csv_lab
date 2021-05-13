@@ -11,15 +11,15 @@ def load_ini(ini_path):
     ini = json.load(open(ini_path, 'r'))
 
     if 'input' not in ini or 'output' not in ini:
-        raise Exception("Validation error")
+        raise Exception(".ini fields validation error")
 
     input = ini['input']
     if 'json' not in input or 'csv' not in input or 'encoding' not in input:
-        raise Exception("Validation error")
+        raise Exception("input fields validation error")
 
     output = ini['output']
     if 'fname' not in output or 'encoding' not in output:
-        raise Exception("Validation error")
+        raise Exception("output fields validation error")
 
     return input, output
 
