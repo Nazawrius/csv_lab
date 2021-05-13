@@ -17,7 +17,7 @@ class Invoice:
     def __repr__(self): #Not finished!!!
         s = self.number + '\n'
         for key in sorted(self.entries.keys()):
-            s += '\t' + str(key) + '\t' + str(self.entries[key]) + '\n'
+            s += f'\t{key}\t{self.entries[key]}\n'
         return s
 
 
