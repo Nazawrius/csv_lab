@@ -47,14 +47,21 @@ class Entry:
         else:
             raise Exception
 
-        if ... :
+        if row[1][-3] == '.' :
             self.price = float(row[1])
+        else:
+            raise Exception
 
-        if ... :
+        if row[2][-4] == '.' :
             self.number = float(row[2])
+        else:
+            raise Exception
 
-        if ... :
+        cost = self.price * self.number
+        if row[3][-3] == '.' and row[3] == f'{cost:.2f}'
             self.cost = float(row[3])
+        else:
+            raise Exception
 
     def __repr__(self):
         return f'{self.name}\t{self.price}\t{self.number}\t{self.cost}'
