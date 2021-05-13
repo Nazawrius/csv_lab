@@ -18,10 +18,10 @@ def main():
         return None
     else:
         print('OK')
-    
+
     print(f'input-csv {input["csv"]}: ', end='')
     try:
-        csv = load_csv(input)
+        data = load_csv(input)
     except Exception:
         print('\n*****program aborted*****')
         return None
@@ -30,7 +30,7 @@ def main():
 
     print(f'input-json {input["json"]}: ', end='')
     try:
-        json = load_stat(input)
+        stat = load_stat(input)
     except Exception:
         print('\n*****program aborted*****')
         return None
@@ -38,14 +38,14 @@ def main():
         print('OK')
 
     print('json?=csv: ', end='')
-    if fit(csv, json):
+    if fit(stat, data):
         print('OK')
     else:
         print('UPS')
-              
+
     print(f'output {output["fname"]}: ', end='')
     try:
-        process(csv, json, output)
+        process(data, output)
     except Exception:
         print('\n*****program aborted*****')
         return None
