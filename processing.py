@@ -6,15 +6,15 @@ def load_ini(ini_path):
     ini = json.load(open(ini_path, 'r'))
 
     if 'input' not in ini or 'output' not in ini:
-        raise Exception
+        raise Exception("Validation error")
 
     input = ini['input']
     if 'json' not in input or 'csv' not in input or 'encoding' not in input:
-        raise Exception
+        raise Exception("Validation error")
 
     output = ini['output']
     if 'fname' not in output or 'encoding' not in output:
-        raise Exception
+        raise Exception("Validation error")
 
     return input, output
 
@@ -49,5 +49,8 @@ def fit(stat, invoices):
 
 def process(invoices, output):
     with open(output["fname"], 'w', encoding=output["encoding"]) as f:
-        for id, invoice in invoices.items():
-            f.write(str(invoice))
+        for invoice in invoices.values():
+            for entry in invoice.entries.values():
+                if invoice.number_of_repeats[entry.name] > 1:
+                    print(invoice)
+                    break
