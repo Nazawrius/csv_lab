@@ -5,8 +5,9 @@ class Invoice:
     def __init__(self, row):
         if len(row) != 6:
             raise Exception("Invoice validation error")
-
-        if len(row[0]) == 11 and row[0].isalnum() and row[0].strip() == row[0]:
+            
+        id = row[0]
+        if len(id) == 11 and id.isalnum() and id.strip() == id:
             self.id = row[0]
         else:
             raise Exception("Invoice name validation error")
