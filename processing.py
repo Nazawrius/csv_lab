@@ -1,5 +1,5 @@
 import json, csv
-from models import Invoice, Entry
+from models import Invoice
 
 
 def load_ini(ini_path):
@@ -52,7 +52,7 @@ def load_stat(input):
     Reading options from .json
     """
     with open(input['json'], 'r', encoding=input['encoding']) as f:
-        return dict(json.load(f))
+        return json.load(f)
 
 
 def fit(stat, invoices):
@@ -89,7 +89,7 @@ def process(invoices, output):
             for key, entry in invoice.entries.items():
                 if invoice.number_of_repeats[entry.name] > 1:
                     flag = True
-                    repeating_entries.add((key, invoice.entries[key]))
+                    repeating_entries.add((key, entry))
 
             if flag:
                 f.write(str(invoice))
