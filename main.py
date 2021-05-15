@@ -13,7 +13,7 @@ def main():
     print('*****')
 
     if len(argv) != 2:
-        abort()
+        abort('Missing/unnecessary command line arguments')
         return None
 
     print(f'ini {argv[1]}: ', end='')
