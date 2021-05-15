@@ -50,8 +50,9 @@ class Entry:
     """
     def __init__(self, row):
         name_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 '-_"
-        if all((ch in name_chars for ch in row[0])) and 2 <= len(row[0]) <= 26 and row[0].strip() == row[0]:
-            self.name = row[0]
+        name = row[0]
+        if all((ch in name_chars for ch in name)) and 2 <= len(name) <= 26 and name.strip() == name:
+            self.name = name
         else:
             raise Exception("Entry name validation error")
 
