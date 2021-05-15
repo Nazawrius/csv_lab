@@ -28,7 +28,7 @@ class Invoice:
         if number.isdigit() and number[0] != 0:
             self.entries[int(number)] = Entry(row[1:])
         else:
-            raise Exception("Entry validation error")
+            raise Exception("Entry number validation error")
 
         entry = self.entries[int(number)]
         if entry.name in self.number_of_repeats:
@@ -55,19 +55,22 @@ class Entry:
         else:
             raise Exception("Entry name validation error")
 
-        if row[1][-3] == '.' and float(row[1]) > 0:
-            self.price = float(row[1])
+        price = row[1]
+        if price[-3] == '.' and float(price) > 0:
+            self.price = float(price)
         else:
             raise Exception("Entry price validation error")
 
-        if row[2][-4] == '.' and float(row[2]) > 0:
-            self.number = float(row[2])
+        number = row[2]
+        if number[-4] == '.' and float(number) > 0:
+            self.number = float(number)
         else:
             raise Exception("Entry number validation error")
 
-        cost = self.price * self.number
-        if row[3][-3] == '.' and row[3] == f'{cost:.2f}':
-            self.cost = float(row[3])
+        wanted_cost = self.price * self.number
+        cost = row[3]
+        if cost[-3] == '.' and cost == f'{wanted_cost:.2f}':
+            self.cost = float(cost)
         else:
             raise Exception("Entry cost validation error")
 
