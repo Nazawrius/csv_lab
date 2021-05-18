@@ -94,4 +94,4 @@ def process(invoices, output):
             if flag:
                 f.write(str(invoice))
                 for key, entry in sorted(repeating_entries, key=key_func):
-                    f.write(f'\t{str(entry)} {str(key)}\n')
+                    f.write(f'\t{str(entry)}\t{str(key)}\n')
