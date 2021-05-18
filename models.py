@@ -42,7 +42,7 @@ class Invoice:
         self.total_cost += entry.cost
 
     def __repr__(self):
-        return f'{self.id} {self.total_number:.3f} {self.total_entries} {self.total_cost:.2f}\n'
+        return f'{self.id}\t{self.total_number:.3f}\t{self.total_entries}\t{self.total_cost:.2f}\n'
 
 
 class Entry:
@@ -77,4 +77,4 @@ class Entry:
             raise Exception("Entry cost validation error")
 
     def __repr__(self):
-        return f'{self.name} {self.price:.2f} {self.number:.3f} {self.cost:.2f}'
+        return f'{self.name}\t{self.price:.2f}\t{self.number:.3f}\t{self.cost:.2f}'
